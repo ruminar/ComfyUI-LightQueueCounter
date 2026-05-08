@@ -49,3 +49,7 @@ git clone https://github.com/ruminar/ComfyUI-LightQueueCounter.git
 ## ライセンス
 
 GPL-3.0（ComfyUI本体の掟に従っておるぞ！）
+
+## 説明画像
+
+<img width="1086" height="1448" alt="ComfyUI-LightQueueCounter説明画像" src="https://github.com/user-attachments/assets/9c354382-bb05-4a45-8d59-6d0db3b90f81" />
