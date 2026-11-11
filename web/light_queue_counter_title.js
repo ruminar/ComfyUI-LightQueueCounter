@@ -1,5 +1,4 @@
 import { app } from "../../../scripts/app.js";
-import { api } from "../../../scripts/api.js";
 
 function getWidgetValue(node, name) {
     const widget = node?.widgets?.find((w) => w.name === name);
@@ -103,6 +102,19 @@ app.registerExtension({
     name: "LightQueueCounter.Title",
 
     beforeRegisterNodeDef(nodeType, nodeData) {
+        if (!["LightQueueCounterTitleTap", "LightQueueCounterSetTitle"].includes(nodeData.name)) {
+            return;
+        }
+
+        // Let ComfyUI resolve execution IDs (including subgraphs) in both renderers.
+        const originalOnExecuted = nodeType.prototype.onExecuted;
+        nodeType.prototype.onExecuted = function (...args) {
+            const result = originalOnExecuted?.apply(this, args);
+            installWidgetCallbacks(this);
+            updateNodeTitle(this, args[0]);
+            return result;
+        };
+
         if (nodeData.name !== "LightQueueCounterTitleTap") {
             return;
         }
@@ -114,28 +126,5 @@ app.registerExtension({
             installWidgetCallbacks(this);
             return result;
         };
-    },
-
-    setup() {
-        api.addEventListener("executed", ({ detail }) => {
-            const nodeId = detail?.node;
-            const output = detail?.output;
-
-            if (!nodeId || !output) {
-                return;
-            }
-
-            if (!output.light_queue_counter_title && !output.light_queue_counter_payload) {
-                return;
-            }
-
-            const node = app.graph.getNodeById(Number(nodeId));
-            if (!node) {
-                return;
-            }
-
-            installWidgetCallbacks(node);
-            updateNodeTitle(node, output);
-        });
     },
 });

@@ -46,6 +46,13 @@ git clone https://github.com/ruminar/ComfyUI-LightQueueCounter.git
 「適当なノードにぶら下げて、折りたたんでおくとタイトルにキュー件数が表示されます」  
 「プッシュ方式で起動し、文字列結合と同等の速さで動作するため、GPU処理を邪魔しにくいです」
 
+## Legacy Nodes / Nodes 2.0 の互換性
+
+タイトル更新には両描画方式に共通の `onExecuted` を使用する。
+実行時点の件数を表示する方式であり、キュー変更の常時監視は行わない。
+調査根拠、ローカルテスト結果、各描画方式での未確認項目は
+[Nodes 2.0互換性調査](docs/nodes-2-compatibility.md)を参照するのじゃ。
+
 ## ライセンス
 
 GPL-3.0（ComfyUI本体の掟に従っておるぞ！）

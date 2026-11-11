@@ -1,3 +1,17 @@
+## 0.1.1
+
+### Fixes
+
+- Route Title Tap and Set Title updates through ComfyUI's shared `onExecuted` callback for Legacy Nodes and Nodes 2.0.
+- Remove numeric node-ID conversion and delegate execution-target resolution to ComfyUI.
+- Preserve existing Python APIs, workflow node identifiers, inputs, outputs, and queue-counting behavior.
+
+### Validation
+
+- Pass 8 JavaScript tests and 5 Python tests.
+- User reported successful operation after testing; renderer versions and individual checklist results were not recorded.
+- See [compatibility notes](docs/nodes-2-compatibility.md) for official-source references and the manual verification checklist.
+
 ## 0.1.0
 
 Initial release.
